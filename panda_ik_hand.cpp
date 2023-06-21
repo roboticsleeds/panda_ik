@@ -526,7 +526,7 @@ py::array_t<double> franka_IKCC(Eigen::Ref<Eigen::MatrixXd> targetHandPosition,
     return result;
 }
 
-PYBIND11_MODULE(franka_ik_pybind, m)
+PYBIND11_MODULE(panda_ik_hand, m)
 {
   m.doc() = "Analytical IK";
   m.def("franka_IK", &franka_IK);
