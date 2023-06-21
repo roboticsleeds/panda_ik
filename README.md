@@ -1,6 +1,14 @@
 # An analytical Inverse Kinematics (IK) solver for Franka Emika Panda
 
-You can support this project by referencing our paper:
+This is a fork and adapted to our needs. Full credits goes to the original authors.
+This fork just creates a nicer Python wrapper class and two variants of the kinematics
+one for the pump and one for the hand.
+
+**Credits:**
+* Original work: [https://github.com/ffall007/franka_analytical_ik](https://github.com/ffall007/franka_analytical_ik)
+* Python bindings: [https://github.com/tasbolat1/franka_analytical_ik](https://github.com/tasbolat1/franka_analytical_ik)
+
+You can support this project by referencing original authors' paper:
 ```
 @InProceedings{HeLiu2021,
   author    = {Yanhao He and Steven Liu},
@@ -12,9 +20,19 @@ You can support this project by referencing our paper:
   doi       = {10.1109/ICCMA54375.2021.9646185},
 }
 ```
-A preprint version is provided in this repository. Note that there is a mistake in the published paper on ieeexplore: ABB GoFa is actually not 7-axis. This has been corrected in the attached preprint.
 
-## Introduction
+A preprint version is provided in their original repository [here](https://github.com/ffall007/franka_analytical_ik). 
+
+## How to use Python bindings
+
+Please follow these steps:
+1. Install `pybind11`: `pip install pybind11`.
+1. Run the script `./build.sh` to generate the bindings.
+1. Copy the `.so` files from `build` to your Python project or add them to your `PYTHONPATH`.
+1. Import the wrapper class: `from panda_kinematics import PandaWithHandKinematics`
+or `from panda_kinematics import PandaWithPumpKinematics` (see `example.py` as an example).
+
+## Details
 
 This project is an IK solver for the 7-axis Franka Emika Panda robot manipulator written in C++. The solver is analytical and completely based on the geometry of the robot, therefore it includes no numerical iteration and returns the results very fast. On a modern computer the computation usually costs only a few microseconds.
 
@@ -53,36 +71,4 @@ Different from `franka_IK_EE()`, this function only returns the solution belongi
 Note that both functions assume that Franka Hand is installed and the solution is regarding to the end effector frame. If the Cartesian pose of the flange frame is to be used as input, according to [Franka documentation](https://frankaemika.github.io/docs/control_parameters.html#denavithartenberg-parameters) you can change the const variable `d7e` to 0.107 and remove the 45 degree offset in q7.
 
 
-
-###### MODIFIED for GraspFlow
-Run this to build the code
-```
-c++ -O3 -Wall -shared -std=c++11 -I../franka_analytical_ik/Eigen -fPIC $(python -m pybind11 --includes) franka_ik_pybind.cpp -o franka_ik_pybind$(python3-config --extension-suffix)
-```
-
-### Test:
-To test wether cpps are compiled correctly, please run:
-```
-python test.py
-```
-If the output is true, then it's successfully compiled.
-
-### Usage:
-Copy any *.so files into the necessary directories to use it as a third party library. For GraspFlow case copy the files to
-```
-cp *.so ../pytorch_6dof-graspnet/
-cp *.so ../graspflow/
-```
-
-
-### TROUBLESHOOTING
-In case 
-```
-fatal error: Eigen/Core: No such file or directory
-```
-this measn pybind is using eigen3, append eigen3 directory in pybind11/include/pybind11/eigen.h:
-```
-# include <eigen3/Eigen/Core>
-```
-reference: [check github issue](https://github.com/opencv/opencv/issues/14868)
 
