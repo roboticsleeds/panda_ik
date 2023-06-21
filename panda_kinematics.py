@@ -42,12 +42,3 @@ class PandaWithPumpKinematics(PandaKinematics):
             solution[-1] -= 0.785398
 
         return solution
-
-
-if __name__ == '__main__':
-    kinematics = PandaWithHandKinematics()
-    position = np.array([0.53, 0.07, 0.31])
-    orientation_quat = np.array([ 0.0, 0.0, 0.0, 1.0]) # xyzw
-    initial_joint_positions = np.array([0, 0, 0, 0, 0, 0, 0])
-    solution = kinematics.ik(initial_joint_positions, position, orientation_quat)
-    print(solution)
