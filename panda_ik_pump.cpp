@@ -35,7 +35,7 @@ std::array< std::array<double, 7>, 4 > franka_IK_EE ( Eigen::Matrix3d R_EE,
     const double d1 = 0.3330;
     const double d3 = 0.3160;
     const double d5 = 0.3840;
-    const double d7e = 0.311; // This is modified for the pump adding 12cm on top of the 10.7cm (see https://frankaemika.github.io/docs/control_parameters.html#denavithartenberg-parameters)
+    const double d7e = 0.213; // This is modified for the pump adding 10.6cm on top of the 10.7cm (see https://frankaemika.github.io/docs/control_parameters.html#denavithartenberg-parameters)
     const double a4 = 0.0825;
     const double a7 = 0.0880;
     
@@ -242,7 +242,7 @@ std::array<double, 7> franka_IK_EE_CC ( Eigen::Matrix3d R_EE,
     const double d1 = 0.3330;
     const double d3 = 0.3160;
     const double d5 = 0.3840;
-    const double d7e = 0.311; // This is modified for the pump adding 12cm on top of the 10.7cm (see https://frankaemika.github.io/docs/control_parameters.html#denavithartenberg-parameters)
+    const double d7e = 0.213; // This is modified for the pump adding 10.6cm on top of the 10.7cm (see https://frankaemika.github.io/docs/control_parameters.html#denavithartenberg-parameters)
     const double a4 = 0.0825;
     const double a7 = 0.0880;
 
